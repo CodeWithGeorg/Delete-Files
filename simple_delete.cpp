@@ -1,4 +1,3 @@
-// simple_delete_fixed.cpp
 #include <iostream>
 #include <filesystem>
 #include <string>
@@ -19,7 +18,6 @@ int main() {
     cout << "Enter extension (e.g. png, jpg, txt): ";
     cin >> ext;
 
-    // Clean & normalize extension
     ext = to_lower(ext);
     if (ext.empty()) {
         cout << "No extension entered.\n";
@@ -36,7 +34,6 @@ int main() {
         return 0;
     }
 
-    // Scan current directory
     for (const auto& entry : fs::directory_iterator(".")) {
         if (!entry.is_regular_file()) continue;
 
@@ -44,6 +41,7 @@ int main() {
         if (file_ext == ext) {
             try {
                 fs::remove(entry.path());
+                //cout << "[WOULD DELETE]: " << entry.path().filename() << "\n"; //<< add this code to see wht will be deleted
                 cout << "Deleted: " << entry.path().filename() << "\n";
                 count++;
             } catch (const exception& e) {
